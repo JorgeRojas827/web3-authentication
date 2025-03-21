@@ -1,9 +1,6 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAuth } from "../hooks/useAuth";
 
 export default function WalletAuth() {
-  const { isConnected } = useAuth();
-
   return (
     <ConnectButton.Custom>
       {({ account, chain, openAccountModal, openConnectModal, mounted }) => {

@@ -19,7 +19,7 @@ export const useAuth = () => {
     try {
       setIsAuthenticating(true);
       setError(null);
-      await AuthService.authenticate(address);
+      await AuthService.authenticate(address as `0x${string}`);
     } catch (err) {
       console.error("Authentication failed:", err);
       setError("Authentication failed. Please try again.");

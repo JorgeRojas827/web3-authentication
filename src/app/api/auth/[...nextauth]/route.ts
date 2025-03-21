@@ -1,10 +1,11 @@
-import { AuthOptions } from "next-auth";
+import { AuthOptions, Session } from "next-auth";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { SiweMessage } from "siwe";
 import { getCsrfToken } from "next-auth/react";
+import { JWT } from "next-auth/jwt";
 
-export const authOptions: AuthOptions = {
+const authOptions: AuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Ethereum",
@@ -43,11 +44,9 @@ export const authOptions: AuthOptions = {
   ],
   session: { strategy: "jwt" },
   callbacks: {
-    async session({ session, token }) {
-      session.address = token.sub;
+    async session({ session, token }: { session: Session; token: JWT }) {
       session.user = {
         name: token.sub,
-        address: token.sub,
       };
       return session;
     },
